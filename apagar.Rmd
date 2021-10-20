@@ -1,14 +1,9 @@
 ---
-title: "Untitled"
-author: "Rodrigo"
-date: "20/10/2021"
-output: 
-  html_document:
-    keep_md: true
+output: rmarkdown::github_document
 ---
 
-```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = TRUE)
+```{r, echo = FALSE}
+knitr::opts_chunk$set(collapse=TRUE, comment="##", fig.retina=2, fig.path = "README_figs/README-")
 ```
 
 ## R Markdown
