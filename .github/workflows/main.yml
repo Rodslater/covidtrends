@@ -14,7 +14,9 @@ jobs:
       - uses: r-lib/actions/setup-tinytex@master
       - name: Install known depedencies  
         run: |
-          Rscript -e "install.packages(c('bookdown', 'tidyverse', 'rmarkdown', 'knitr', 'devtools', 'gtrendsR', 'here'))"
+          Rscript -e "install.packages(c('bookdown', 'tidyverse', 'rmarkdown', 'knitr', 
+          'devtools', 'gtrendsR', 'here','magrittr','dplyr','xts','tbl2xts','dygraphs',
+          'rgdal','RColorBrewer','leaflet','wordcloud','flexdashboard',))"
       - name: render all R Markdown documents 
         run: |
           Rscript -e "lapply(list.files(pattern = 'Rmd|rmd', recursive = TRUE), rmarkdown::render)"
