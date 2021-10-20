@@ -15,7 +15,6 @@ jobs:
       - name: Install known depedencies  
         run: |
           Rscript -e "install.packages(c('bookdown', 'tidyverse', 'rmarkdown', 'knitr', 'devtools', 'here'))"
-          Rscript -e "devtools::install_github('ThinkR-open/attachment')"
       - name: Install unknown depedencies 
         run: |
           Rscript -e "attachment::install_if_missing(attachment::att_from_rmds(path = '.'))"
