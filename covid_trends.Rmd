@@ -1,7 +1,6 @@
 ---
 title: "Tendências de pesquisa por 'Covid' e 'Covid Sergipe' no Google, no Brasil, a partir de março de 2020"
-output: 
-  flexdashboard::flex_dashboard:
+output: github_document:
     orientation: columns
     navbar:
       - { title: "Café com Dados", href: "http://www.cafecomdados.com", align: right }
