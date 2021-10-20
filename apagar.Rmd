@@ -1,94 +1,28 @@
 ---
 title: "Exploring one Variable"
-author: "Shankar"
-date: "October 1, 2016"
+author: "Rodrigo"
+date: "October 20, 2021"
 output:  
   html_document:
     keep_md: true
 ---
 
-This is an R Markdown document that I used to learn Data Analysis from udacity which explorees one variable
+## R Markdown
 
+This is an R Markdown document. Markdown is a simple formatting syntax for authoring HTML, PDF, and MS Word documents. For more details on using R Markdown see <http://rmarkdown.rstudio.com>.
 
-```{r}
-fbdata <- read.csv("https://s3.amazonaws.com/udacity-hosted-downloads/ud651/pseudo_facebook.tsv", sep = '\t')
+When you click the **Knit** button a document will be generated that includes both content as well as the output of any embedded R code chunks within the document. You can embed an R code chunk like this:
 
+```{r cars}
+summary(cars)
 ```
 
-Histogram of birthdays
-```{r}
-knitr::opts_chunk$set(fig.path = "README_figs/README-")
-library(ggplot2)
-names(fbdata)
+## Including Plots
 
-qplot(dob_day,data = fbdata) +
-  scale_x_discrete(breaks= 1:31) +
-  facet_wrap(~dob_month, ncol=3)
-```
+You can also embed plots, for example:
 
-
-Friend count by gender
-```{r}
-#qplot(friend_count, data=fbdata, xlim = c(0,1000))
-
-qplot(friend_count, data=subset(fbdata,!is.na(gender)), binwidth=25)+
-  scale_x_continuous(limits=c(0,1000), breaks= seq(0,1000,50))+
-  facet_wrap(~gender)
-```
-Table of gender count
-
-```{r}
-table(fbdata$gender)
-```
-summary of friend count by gender
-```{r}
-by(fbdata$friend_count,fbdata$gender, summary)
-
-```
-
-Scaling and Transoforming variabels
-```{r}
-p1= qplot(friend_count,data=subset(fbdata,!is.na(gender)))+facet_wrap(~gender)
-p2= p1 + scale_x_log10() +xlab("Log Transformed")
-p3=p1+ scale_x_sqrt() + xlab("squared")
-library(gridExtra)
-grid.arrange(p1,p2,p3, ncol=1)
-```
-Freequency ploygons
-
-```{r}
-ggplot(aes(x = friend_count, y = ..count../sum(..count..)), data = subset(fbdata, !is.na(gender))) + 
-  geom_freqpoly(aes(color = gender), binwidth=10) + 
-  scale_x_continuous(limits = c(0, 1000), breaks = seq(0, 1000, 50)) + 
-  xlab('Friend Count') + 
-  ylab('Percentage of users with that friend count')
-
-```
-
-
-```{r}
-ggplot(aes(x = www_likes, y = ..count../sum(..count..)), data = subset(fbdata, !is.na(gender))) + 
-  geom_freqpoly(aes(color = gender)) + 
-  scale_x_log10()
-
-
-```
-
-Box plot of friend count by gender
-outliers are 1.5 times IQR
-```{r}
-qplot(x=gender,y= friend_count,data = subset(fbdata,!is.na(gender)),
-      geom = 'boxplot', ylim = c(0,1000))
-
-qplot(x=gender,y= friend_count,data = subset(fbdata,!is.na(gender)),
-      geom = 'boxplot')+ coord_cartesian(ylim = c(0,1000))
-```
-
-
-Summary of Suedo facebook data
-
-```{r}
-summary(fbdata)
+```{r pressure, echo=FALSE}
+plot(pressure)
 ```
 
 Note that the `echo = FALSE` parameter was added to the code chunk to prevent printing of the R code that generated the plot.
