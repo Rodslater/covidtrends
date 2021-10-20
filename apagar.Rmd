@@ -1,8 +1,10 @@
 ---
-title: "Exploring one Variable"
+title: "Test"
 author: "Rodrigo"
 date: "October 20, 2021"
-output: rmarkdown::github_document 
+output: 
+  html_document:
+    keep_md: true
 ---
 
 ## R Markdown
