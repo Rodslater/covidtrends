@@ -31,8 +31,9 @@ jobs:
         R -e 'install.packages("leaflet")'
         R -e 'install.packages("wordcloud")'
         R -e 'install.packages("flexdashboard")'
+    
     # Run R script
-    - name: Scrape
+    - name: Covid_Trends
       run: Rscript covid_trends.Rmd
       
  # Add new files in data folder, commit along with other modified files, push
