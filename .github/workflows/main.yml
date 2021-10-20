@@ -8,7 +8,7 @@ on:
 
 
 jobs: 
-  autoscrape:
+  autocovid:
     # The type of runner that the job will run on
     runs-on: macOS-11
 
@@ -31,7 +31,9 @@ jobs:
         R -e 'install.packages("leaflet")'
         R -e 'install.packages("wordcloud")'
         R -e 'install.packages("flexdashboard")'
-    
+    env:
+      GITHUB_PAT: ${{ secrets.GITHUB_TOKEN }}
+      
     # Run R script
     - name: Covid_Trends
       run: Rscript covid_trends.Rmd
