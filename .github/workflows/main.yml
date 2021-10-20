@@ -34,7 +34,7 @@ jobs:
         R -e 'install.packages("flexdashboard")'
     # Run R script
     - name: Covid_Trends
-      run: Rscript -e 'rmarkdown::render("covid_trends.Rmd", output_format = "md_document")'
+      run: Rscript -e 'rmarkdown::render("covid_trends.Rmd")'
       
  # Add new files in data folder, commit along with other modified files, push
     - name: Commit files
