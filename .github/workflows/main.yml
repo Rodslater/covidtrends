@@ -1,15 +1,27 @@
-autoscrape:
+# Hourly scraping
+name: covidtrends
+
+# Controls when the action will run.
+on:
+  push:
+    branches: main
+
+
+jobs: 
+  covidtrends:
     # The type of runner that the job will run on
     runs-on: macOS-11
+
     # Load repo and install R
     steps:
     - uses: actions/checkout@master
     - uses: r-lib/actions/setup-r@master
+
     # Set-up R
     - name: Install packages
       run: |
-        R -e 'install.packages("rmarkdown")'
         R -e 'install.packages("gtrendsR")'
+        R -e 'install.packages("rmarkdown")'
         R -e 'install.packages("magrittr")'
         R -e 'install.packages("dplyr")'
         R -e 'install.packages("xts")'
@@ -20,11 +32,10 @@ autoscrape:
         R -e 'install.packages("leaflet")'
         R -e 'install.packages("wordcloud")'
         R -e 'install.packages("flexdashboard")'
-    
     # Run R script
     - name: Covid_Trends
       run: Rscript covid_trends.Rmd
-
+      
  # Add new files in data folder, commit along with other modified files, push
     - name: Commit files
       run: |
@@ -35,4 +46,4 @@ autoscrape:
         git push origin main
       env:
         REPO_KEY: ${{secrets.GITHUB_TOKEN}}
-username: github-actions
+        username: github-actions
