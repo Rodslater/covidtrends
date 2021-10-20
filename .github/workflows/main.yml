@@ -16,6 +16,8 @@ jobs:
     steps:
     - uses: actions/checkout@master
     - uses: r-lib/actions/setup-r@master
+        env:
+      GITHUB_PAT: ${{ secrets.GITHUB_TOKEN }}
 
     # Set-up R
     - name: Install packages
@@ -31,8 +33,6 @@ jobs:
         R -e 'install.packages("leaflet")'
         R -e 'install.packages("wordcloud")'
         R -e 'install.packages("flexdashboard")'
-    env:
-      GITHUB_PAT: ${{ secrets.GITHUB_TOKEN }}
       
     # Run R script
     - name: Covid_Trends
