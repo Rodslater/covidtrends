@@ -16,7 +16,7 @@ jobs:
         run: |
           Rscript -e "install.packages(c('bookdown', 'tidyverse', 'rmarkdown', 'knitr', 
           'devtools', 'gtrendsR', 'here','magrittr','dplyr','xts','tbl2xts','dygraphs',
-          'rgdal','RColorBrewer','leaflet','wordcloud','flexdashboard',))"
+          'rgdal','RColorBrewer','leaflet','wordcloud','flexdashboard'))"
       - name: render all R Markdown documents 
         run: |
           Rscript -e "lapply(list.files(pattern = 'Rmd|rmd', recursive = TRUE), rmarkdown::render)"
