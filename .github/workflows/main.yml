@@ -35,6 +35,7 @@ jobs:
     # Run R script
     - name: Covid_Trends
       run: Rscript -e 'rmarkdown::render("covid_trends.Rmd")'
+      PATH: /usr/lib/rstudio-server/bin/pandoc
       
  # Add new files in data folder, commit along with other modified files, push
     - name: Commit files
