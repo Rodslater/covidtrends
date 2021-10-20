@@ -1,50 +1,24 @@
-# Hourly scraping
-name: covidtrends
+# from https://github.com/cboettig/compendium/blob/master/.github/workflows/main.yml
+on: [push]
 
-# Controls when the action will run.
-on:
-  push:
-    branches: main
+name: render all R Markdown documents 
 
-
-jobs: 
-  covidtrends:
-    # The type of runner that the job will run on
+jobs:
+  render:
+    name: render all R Markdown documents 
     runs-on: macOS-11
-
-    # Load repo and install R
     steps:
-    - uses: actions/checkout@master
-    - uses: r-lib/actions/setup-r@master
-
-    # Set-up R
-    - name: Install packages
-      run: |
-        R -e 'install.packages("gtrendsR")'
-        R -e 'install.packages("rmarkdown")'
-        R -e 'install.packages("magrittr")'
-        R -e 'install.packages("dplyr")'
-        R -e 'install.packages("xts")'
-        R -e 'install.packages("tbl2xts")'
-        R -e 'install.packages("dygraphs")'
-        R -e 'install.packages("rgdal")'
-        R -e 'install.packages("RColorBrewer")'
-        R -e 'install.packages("leaflet")'
-        R -e 'install.packages("wordcloud")'
-        R -e 'install.packages("flexdashboard")'
-    # Run R script
-    - name: Covid_Trends
-      run: Rscript -e 'rmarkdown::render("covid_trends.Rmd")'
-      PATH: /usr/lib/rstudio-server/bin/pandoc
-      
- # Add new files in data folder, commit along with other modified files, push
-    - name: Commit files
-      run: |
-        git config --local user.name actions-user
-        git config --local user.email "actions@github.com"
-        git add data/*
-        git commit -am "GH ACTION Headlines $(date)"
-        git push origin main
-      env:
-        REPO_KEY: ${{secrets.GITHUB_TOKEN}}
-        username: github-actions
+      - uses: actions/checkout@v1
+      - uses: r-lib/actions/setup-r@v1
+      - uses: r-lib/actions/setup-pandoc@v1
+      - uses: r-lib/actions/setup-tinytex@master
+      - name: Install known depedencies  
+        run: |
+          Rscript -e "install.packages(c('bookdown', 'tidyverse', 'rmarkdown', 'knitr', 'devtools', 'here'))"
+          Rscript -e "devtools::install_github('ThinkR-open/attachment')"
+      - name: Install unknown depedencies 
+        run: |
+          Rscript -e "attachment::install_if_missing(attachment::att_from_rmds(path = '.'))"
+      - name: render all R Markdown documents 
+        run: |
+          Rscript -e "lapply(list.files(pattern = 'Rmd|rmd', recursive = TRUE), rmarkdown::render)"
