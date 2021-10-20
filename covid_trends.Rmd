@@ -12,17 +12,17 @@ output: github_document:
   
   ```{r setup, include=FALSE}
 
-library(gtrendsR)
-library(magrittr)
-library(dplyr)
-library(xts)
-library(tbl2xts)
-library(dygraphs)
-library(rgdal)
-library(RColorBrewer)
-library(leaflet)
-library(wordcloud)
-library(flexdashboard)
+require(gtrendsR)
+require(magrittr)
+require(dplyr)
+require(xts)
+require(tbl2xts)
+require(dygraphs)
+require(rgdal)
+require(RColorBrewer)
+require(leaflet)
+require(wordcloud)
+require(flexdashboard)
 
 ```
 
